@@ -1,0 +1,11 @@
+import * as mongoose from 'mongoose';
+
+export const UserSchema = new mongoose.Schema({
+    name: String,
+    password: String,
+    bio: String,
+    email: {
+        unique: true,
+        type: String,
+    }
+});
