@@ -26,4 +26,9 @@ export class UserService {
     deleteOne(id: number): Observable<any> {
         return from(this.userRepository.delete(id))
     }
+
+    //update one user
+    updateOne(id: number, user: User): Observable<any> {
+        return from(this.userRepository.update(id, user))
+    }
 }
