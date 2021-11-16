@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { User } from '../models/user.interface';
 import { UserService } from '../service/user.service';
@@ -24,4 +24,11 @@ export class UserController {
     findAll(): Observable<User[]> {
         return this.userService.findAll();
     }
+
+    //delete one use
+    @Delete(':id')
+    deleteOne(@Param() id: string): Observable<User> {
+        return this.userService.deleteOne(Number(id));
+    }
+
 }
