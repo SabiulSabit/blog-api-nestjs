@@ -13,7 +13,7 @@ export class UserService {
     ) { }
 
     // create a user
-    creat(user: User): Observable<User> {
+    create(user: User): Observable<User> {
         return from(this.userRepository.save(user));
     }
 
