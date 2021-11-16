@@ -13,9 +13,9 @@ export class UserController {
         return this.userService.create(user);
     }
 
-    // find one user by id
-    // @Get(':id')
-    // findOne(@Param()params) : Observable<User> {
-    //     return this.userService.
-    // }
+    //find one user by id
+    @Get(':id')
+    findOne(@Param() params): Observable<User> {
+        return this.userService.findOne(params.id);
+    }
 }
