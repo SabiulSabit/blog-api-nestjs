@@ -14,7 +14,7 @@ import { MongooseModule } from '@nestjs/mongoose'
     //   url: process.env.DATABASE_URL,
     //   autoLoadEntities: true,
     // }),
-    MongooseModule.forRoot("mongodb://localhost/test123"),
+    MongooseModule.forRoot("mongodb://localhost/blog-api-nestjs"),
     UserModule
   ],
   controllers: [AppController],
