@@ -9,31 +9,31 @@ export class UserController {
 
     //create a user
     @Post()
-    create(@Body() user: User): Observable<User> {
+    create(@Body() user: User) {
         return this.userService.create(user);
     }
 
     //find one user by id
-    @Get(':id')
-    findOne(@Param() params): Observable<User> {
-        return this.userService.findOne(params.id);
-    }
+    // @Get(':id')
+    // findOne(@Param() params): Observable<User> {
+    //     return this.userService.findOne(params.id);
+    // }
 
     //find all user
-    @Get()
-    findAll(): Observable<User[]> {
-        return this.userService.findAll();
-    }
+    // @Get()
+    // findAll(): Observable<User[]> {
+    //     return this.userService.findAll();
+    // }
 
     //delete one use
-    @Delete(':id')
-    deleteOne(@Param() id: string): Observable<User> {
-        return this.userService.deleteOne(Number(id));
-    }
+    // @Delete(':id')
+    // deleteOne(@Param() id: string): Observable<User> {
+    //     return this.userService.deleteOne(Number(id));
+    // }
 
     //update a user
-    @Put(':id')
-    updateOne(@Param('id') id: string, @Body() user: User): Observable<User> {
-        return this.userService.updateOne(Number(id), user);
-    }
+    // @Put(':id')
+    // updateOne(@Param('id') id: string, @Body() user: User): Observable<User> {
+    //     return this.userService.updateOne(Number(id), user);
+    // }
 }
