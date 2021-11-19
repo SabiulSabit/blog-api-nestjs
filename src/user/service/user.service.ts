@@ -1,8 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { from, Observable } from 'rxjs';
-import { Repository } from 'typeorm';
-import { UserEntity } from '../models/user.entity';
 import { User } from '../models/user.interface';
 import { InjectModel } from '@nestjs/mongoose'
 import { Model } from 'mongoose';
@@ -11,14 +7,10 @@ import { UserModule } from '../user.module';
 @Injectable()
 export class UserService {
 
-    // constructor(
-    //     @InjectRepository(UserEntity) private readonly userRepository: Repository<UserEntity>
-    // ) { }
-
     constructor(@InjectModel("User") private readonly userRepository: Model<User>) {
 
     }
-    // create a user : Observable<Any> 
+    // create a user
     async create(user: User) {
         const userInfo = new this.userRepository(user);
         let result = await userInfo.save();
