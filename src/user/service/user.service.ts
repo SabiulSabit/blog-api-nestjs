@@ -14,9 +14,8 @@ export class UserService {
     async create(user: User) {
         const userInfo = new this.userRepository(user);
         let result = await userInfo.save();
-        console.log(result);
 
-        // return from(this.userRepository.save(user));
+        return result;
     }
 
     //find a user by id
