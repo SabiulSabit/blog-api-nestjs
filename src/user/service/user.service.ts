@@ -24,9 +24,9 @@ export class UserService {
     // }
 
     //find all user
-    // findAll(): Observable<User[]> {
-    //     return from(this.userRepository.find());
-    // }
+    find() {
+        return this.userRepository.find();
+    }
 
     //delete one user
     // deleteOne(id: number): Observable<any> {

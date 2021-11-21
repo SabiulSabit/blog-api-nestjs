@@ -20,10 +20,10 @@ export class UserController {
     // }
 
     //find all user
-    // @Get()
-    // findAll(): Observable<User[]> {
-    //     return this.userService.findAll();
-    // }
+    @Get()
+    findAll() {
+        return this.userService.find();
+    }
 
     //delete one use
     // @Delete(':id')
