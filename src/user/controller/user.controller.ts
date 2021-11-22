@@ -26,10 +26,10 @@ export class UserController {
     }
 
     //delete one use
-    // @Delete(':id')
-    // deleteOne(@Param() id: string): Observable<User> {
-    //     return this.userService.deleteOne(Number(id));
-    // }
+    @Delete(':id')
+    deleteOne(@Param() id: string) {
+        return this.userService.deleteOne(id);
+    }
 
     //update a user
     // @Put(':id')
