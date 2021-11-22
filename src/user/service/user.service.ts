@@ -39,9 +39,7 @@ export class UserService {
     //update one user
     async updateOne(id: string, name: string, username: string) {
 
-        console.log(name);
         const updatedUser = await this.userRepository.findById(id)
-
         if (name) {
             updatedUser.name = name;
         }
@@ -50,8 +48,7 @@ export class UserService {
         }
 
         updatedUser.save()
-
         return
-        //return this.userRepository.update(id, user)
+
     }
 }
