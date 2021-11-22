@@ -37,7 +37,21 @@ export class UserService {
     }
 
     //update one user
-    // updateOne(id: number, user: User): Observable<any> {
-    //     return from(this.userRepository.update(id, user))
-    // }
+    async updateOne(id: string, name: string, username: string) {
+
+        console.log(name);
+        const updatedUser = await this.userRepository.findById(id)
+
+        if (name) {
+            updatedUser.name = name;
+        }
+        if (username) {
+            updatedUser.username = username;
+        }
+
+        updatedUser.save()
+
+        return
+        //return this.userRepository.update(id, user)
+    }
 }
