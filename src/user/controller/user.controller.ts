@@ -14,10 +14,10 @@ export class UserController {
     }
 
     //find one user by id
-    // @Get(':id')
-    // findOne(@Param() params): Observable<User> {
-    //     return this.userService.findOne(params.id);
-    // }
+    @Get(':id')
+    findOne(@Param() params) {
+        return this.userService.findOne(params.id);
+    }
 
     //find all user
     @Get()

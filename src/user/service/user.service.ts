@@ -19,9 +19,9 @@ export class UserService {
     }
 
     //find a user by id
-    // findOne(id: number): Observable<User> {
-    //     return from(this.userRepository.findOne({ id }))
-    // }
+    findOne(id: number) {
+        return this.userRepository.findById(id)
+    }
 
     //find all user
     find() {
