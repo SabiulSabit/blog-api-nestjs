@@ -15,13 +15,10 @@ export class AuthService {
 
     //hash password
     hashPassword(password: string) {
+        let hashValue = bycrypt.hash(password, 13)
+        console.log(hashValue);
 
-        console.log("Here: ", password);
-
-        let a = bycrypt.hashSync(password, 13);
-        console.log(a);
-
-        return bycrypt.hash(password, 13)
+        return hashValue;
     }
 
     //compare password
