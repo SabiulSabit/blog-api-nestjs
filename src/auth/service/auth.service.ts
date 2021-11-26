@@ -18,4 +18,9 @@ export class AuthService {
         return bycrypt.hash(password, 13)
     }
 
+    //compare password
+    comparePassword(newPassword: string, passwordHash: string) {
+        return bycrypt.compare(newPassword, passwordHash);
+    }
+
 }
