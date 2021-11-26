@@ -5,5 +5,10 @@ export const UserSchema = new mongoose.Schema({
     username: {
         unique: true,
         type: String
-    }
+    },
+    email: {
+        unique: true,
+        type: String
+    },
+    password: String
 })
