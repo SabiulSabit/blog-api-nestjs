@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { User } from 'src/user/models/user.interface';
-import bycrypt from 'bcryptjs';
+const bycrypt = require('bcryptjs');
 
 @Injectable()
 export class AuthService {
@@ -15,6 +15,12 @@ export class AuthService {
 
     //hash password
     hashPassword(password: string) {
+
+        console.log("Here: ", password);
+
+        let a = bycrypt.hashSync(password, 13);
+        console.log(a);
+
         return bycrypt.hash(password, 13)
     }
 
