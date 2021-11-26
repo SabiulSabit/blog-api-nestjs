@@ -3,19 +3,22 @@ import { User } from '../models/user.interface';
 import { InjectModel } from '@nestjs/mongoose'
 import { Model } from 'mongoose';
 import { UserModule } from '../user.module';
+import { AuthService } from 'src/auth/service/auth.service';
 
 @Injectable()
 export class UserService {
 
-    constructor(@InjectModel("User") private readonly userRepository: Model<User>) {
+    constructor(@InjectModel("User") private readonly userRepository: Model<User>, private authService: AuthService) {
 
     }
     // create a user
     async create(user: User) {
-        const userInfo = new this.userRepository(user);
-        let result = await userInfo.save();
+        //const userInfo = new this.userRepository(user);
+        //let result = await userInfo.save();
 
-        return result;
+        let hash = this.authService.hashPassword(user.password)
+
+        return hash;
     }
 
     //find a user by id
