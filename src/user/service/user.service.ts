@@ -15,14 +15,15 @@ export class UserService {
     // create a user
     async create(user: User) {
 
-        this.authService.hashPassword(user.password)
-        // console.log("User", new);
-        console.log("Changes");
+        const hashPassword =  await this.authService.hashPassword(user.password)
+        user.password = String(hashPassword)
+        
+        const userInfo = new this.userRepository(user);
+        let result = await userInfo.save();
+        let filterUser  = result.toObject();
+        delete filterUser.password;
 
-        // const userInfo = new this.userRepository(user);
-        // let result = await userInfo.save();
-
-        return "result";
+        return filterUser;
     }
 
     //find a user by id

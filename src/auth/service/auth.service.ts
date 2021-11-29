@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { User } from 'src/user/models/user.interface';
-const bycrypt = require('bcryptjs');
+const bcrypt = require('bcryptjs');
 
 @Injectable()
 export class AuthService {
@@ -14,16 +14,27 @@ export class AuthService {
     }
 
     //hash password
-    hashPassword(password: string) {
-        let hashValue = bycrypt.hash(password, 13)
-        console.log(hashValue);
+    async hashPassword(password: string) {
 
-        return hashValue;
+
+        const hashedPassword = await new Promise((resolve, reject) => {
+            bcrypt.hash(password, 13, function(err, hash) {
+              if (err) reject(err)
+              resolve(hash)
+            });
+          })
+
+          
+       
+            return hashedPassword;
+        
+       
+        
     }
 
     //compare password
     comparePassword(newPassword: string, passwordHash: string) {
-        return bycrypt.compare(newPassword, passwordHash);
+        return bcrypt.compare(newPassword, passwordHash);
     }
 
 }
