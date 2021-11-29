@@ -4,6 +4,7 @@ import { InjectModel } from '@nestjs/mongoose'
 import { Model } from 'mongoose';
 import { UserModule } from '../user.module';
 import { AuthService } from 'src/auth/service/auth.service';
+import { switchMap } from 'rxjs';
 
 @Injectable()
 export class UserService {
@@ -13,12 +14,16 @@ export class UserService {
     }
     // create a user
     async create(user: User) {
-        //const userInfo = new this.userRepository(user);
-        //let result = await userInfo.save();
 
-        let hash = this.authService.hashPassword(user.password)
+        const hashPassword =  await this.authService.hashPassword(user.password)
+        user.password = String(hashPassword)
+        
+        const userInfo = new this.userRepository(user);
+        let result = await userInfo.save();
+        let filterUser  = result.toObject();
+        delete filterUser.password;
 
-        return hash;
+        return filterUser;
     }
 
     //find a user by id
