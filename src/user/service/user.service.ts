@@ -28,7 +28,7 @@ export class UserService {
 
     //find a user by id
     findOne(id: number) {
-        return this.userRepository.findById(id)
+        return this.userRepository.findById(id).select('-password')
     }
 
     //find all user
