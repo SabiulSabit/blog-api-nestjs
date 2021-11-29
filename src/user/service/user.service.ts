@@ -33,7 +33,7 @@ export class UserService {
 
     //find all user
     find() {
-        return this.userRepository.find();
+        return this.userRepository.find().select('-password');
     }
 
     //delete one user
