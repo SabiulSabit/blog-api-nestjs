@@ -33,7 +33,7 @@ export class UserController {
 
     //update a user
     @Put(':id')
-    updateOne(@Param('id') id: string, @Body("name") name: string, @Body("username") username: string) {
-        return this.userService.updateOne(id, name, username);
+    updateOne(@Param('id') id: string, @Body("name") name: string, @Body("username") username: string,  @Body("email") email: string) {
+        return this.userService.updateOne(id, name, username, email);
     }
 }
