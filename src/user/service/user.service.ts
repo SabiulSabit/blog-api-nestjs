@@ -45,18 +45,22 @@ export class UserService {
     }
 
     //update one user
-    async updateOne(id: string, name: string, username: string) {
+    async updateOne(id: string, name: string, username: string, email: string) {
 
-        const updatedUser = await this.userRepository.findById(id)
+        const updatedUser = await this.userRepository.findById(id).select('-password')
         if (name) {
             updatedUser.name = name;
         }
         if (username) {
             updatedUser.username = username;
         }
+        if (email) {
+            updatedUser.email = email;
+        }
+
 
         updatedUser.save()
-        return
+        return updatedUser;
 
     }
 }
