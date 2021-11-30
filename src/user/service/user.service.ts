@@ -58,9 +58,13 @@ export class UserService {
             updatedUser.email = email;
         }
 
-
         updatedUser.save()
         return updatedUser;
-
     }
+
+    //find user by email
+    findByMail(email: string){
+        return this.userRepository.findOne({email})
+    }
+
 }
