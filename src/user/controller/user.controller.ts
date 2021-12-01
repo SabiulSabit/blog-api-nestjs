@@ -13,6 +13,14 @@ export class UserController {
         return this.userService.create(user);
     }
 
+      //login
+      @Post('login')
+      login(@Body() user: User) {
+          let result = this.userService.login(user);
+          return result;
+      }
+  
+
     //find one user by id
     @Get(':id')
     findOne(@Param() params) {
