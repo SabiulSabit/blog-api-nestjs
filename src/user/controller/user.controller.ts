@@ -13,13 +13,13 @@ export class UserController {
         return this.userService.create(user);
     }
 
-      //login
-      @Post('login')
-      login(@Body() user: User) {
-          let result = this.userService.login(user);
-          return result;
-      }
-  
+    //login
+    @Post('login')
+    login(@Body() user: User) {
+        let result = this.userService.login(user);
+        return result;
+    }
+
 
     //find one user by id
     @Get(':id')
@@ -41,7 +41,7 @@ export class UserController {
 
     //update a user
     @Put(':id')
-    updateOne(@Param('id') id: string, @Body("name") name: string, @Body("username") username: string,  @Body("email") email: string) {
+    updateOne(@Param('id') id: string, @Body("name") name: string, @Body("username") username: string, @Body("email") email: string) {
         return this.userService.updateOne(id, name, username, email);
     }
 }

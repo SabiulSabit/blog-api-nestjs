@@ -5,36 +5,37 @@ const bcrypt = require('bcryptjs');
 
 @Injectable()
 export class AuthService {
-    // auth service constructor
-    constructor(private readonly jwtService: JwtService) { }
+  // auth service constructor
+  constructor(private readonly jwtService: JwtService) { }
 
-    //generate jwt token
-    generateJWT(user: User) {
-        return this.jwtService.signAsync({ user })
-    }
+  //generate jwt token
+  generateJWT(user: User) {
+    return this.jwtService.signAsync({ user })
+  }
 
-    //hash password
-    async hashPassword(password: string) {
+  //hash password
+  async hashPassword(password: string) {
+    const hashedPassword = await new Promise((resolve, reject) => {
+      bcrypt.hash(password, 13, function (err, hash) {
+        if (err) reject(err)
+        resolve(hash)
+      });
+    })
 
+    return hashedPassword;
+  }
 
-        const hashedPassword = await new Promise((resolve, reject) => {
-            bcrypt.hash(password, 13, function(err, hash) {
-              if (err) reject(err)
-              resolve(hash)
-            });
-          })
+  //compare password
+  async comparePassword(newPassword: string, passwordHash: string) {
+    const result: boolean = await new Promise((resolve, reject) => {
+      bcrypt.compare(newPassword, passwordHash, function (err, hash) {
+        if (err) reject(err)
+        resolve(hash)
+      });
+    })
+    //console.log(result);
 
-          
-       
-            return hashedPassword;
-        
-       
-        
-    }
-
-    //compare password
-    comparePassword(newPassword: string, passwordHash: string) {
-        return bcrypt.compare(newPassword, passwordHash);
-    }
+    return result;
+  }
 
 }
