@@ -9,8 +9,9 @@ export class AuthService {
   constructor(private readonly jwtService: JwtService) { }
 
   //generate jwt token
-  generateJWT(user: User) {
-    return this.jwtService.signAsync({ user })
+  async generateJWT(user: User) {
+
+    return { token: await this.jwtService.signAsync({ user }) }
   }
 
   //hash password

@@ -69,11 +69,9 @@ export class UserService {
         if (result) {
             return this.authService.generateJWT(result);
         } else {
-            return "Unauthorized!!"
+            return { error: "Unauthorized!!" }
         }
     }
-
-
 
     // check valid user
     async validateUser(email: string, password: string) {
@@ -81,7 +79,9 @@ export class UserService {
 
         let match = await this.authService.comparePassword(password, user.password);
         if (match) {
-            return user
+            let filterUser = user.toObject();
+            delete filterUser.password;
+            return filterUser
         } else {
             return null
         }
