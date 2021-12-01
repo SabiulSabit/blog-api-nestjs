@@ -62,6 +62,19 @@ export class UserService {
         return updatedUser;
     }
 
+    // check valid user
+    validateUser(email: string, password: string){
+         let user = this.findByMail(email).then((data)=>{
+            let match = this.authService.comparePassword(password, data.password);
+             if(match){
+                 return user;
+             }else{
+                 throw Error;
+             }
+         })
+        
+    }
+
     //find user by email
     findByMail(email: string){
         return this.userRepository.findOne({email})
