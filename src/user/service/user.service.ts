@@ -15,18 +15,18 @@ export class UserService {
     // create a user
     async create(user: User) {
 
-        const hashPassword =  await this.authService.hashPassword(user.password)
+        const hashPassword = await this.authService.hashPassword(user.password)
         user.password = String(hashPassword)
-        
+
         const userInfo = new this.userRepository(user);
         let result = await userInfo.save();
-        let filterUser  = result.toObject();
+        let filterUser = result.toObject();
         delete filterUser.password;
 
         return filterUser;
     }
 
-  
+
     //find a user by id
     findOne(id: number) {
         return this.userRepository.findById(id).select('-password')
@@ -64,34 +64,33 @@ export class UserService {
     }
 
     //user login
-      login(user: User){
-       let result = this.validateUser(user.email, user.password)
-       if(result){
-           return this.authService.generateJWT(result);
-       }else{
-           return "User Not Found"
-       }
+    async login(user: User) {
+        let result = await this.validateUser(user.email, user.password)
+        if (result) {
+            return this.authService.generateJWT(result);
+        } else {
+            return "Unauthorized!!"
+        }
     }
+
 
 
     // check valid user
-    validateUser(email: string, password: string): User{
-         let user = this.findByMail(email).then((data)=>{
-            let match = this.authService.comparePassword(password, data.password);
-             if(match){
-                 return user;
-             }else{
-                 throw Error;
-             }
-         })
+    async validateUser(email: string, password: string) {
+        let user = await this.findByMail(email)
 
-         return user[0];
-        
+        let match = await this.authService.comparePassword(password, user.password);
+        if (match) {
+            return user
+        } else {
+            return null
+        }
+
     }
 
     //find user by email
-    findByMail(email: string){
-        return this.userRepository.findOne({email})
+    findByMail(email: string) {
+        return this.userRepository.findOne({ email })
     }
 
 }
