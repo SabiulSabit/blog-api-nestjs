@@ -62,8 +62,19 @@ export class UserService {
         return updatedUser;
     }
 
+    //user login
+      login(user: User){
+       let result = this.validateUser(user.email, user.password)
+       if(result){
+           return this.authService.generateJWT(result);
+       }else{
+           return "User Not Found"
+       }
+    }
+
+
     // check valid user
-    validateUser(email: string, password: string){
+    validateUser(email: string, password: string): User{
          let user = this.findByMail(email).then((data)=>{
             let match = this.authService.comparePassword(password, data.password);
              if(match){
@@ -72,6 +83,8 @@ export class UserService {
                  throw Error;
              }
          })
+
+         return user[0];
         
     }
 
