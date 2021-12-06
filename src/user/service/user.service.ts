@@ -2,9 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { User } from '../models/user.interface';
 import { InjectModel } from '@nestjs/mongoose'
 import { Model } from 'mongoose';
-import { UserModule } from '../user.module';
 import { AuthService } from 'src/auth/service/auth.service';
-import { switchMap } from 'rxjs';
 
 @Injectable()
 export class UserService {
