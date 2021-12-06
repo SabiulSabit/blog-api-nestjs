@@ -10,5 +10,11 @@ export const UserSchema = new mongoose.Schema({
         unique: true,
         type: String
     },
-    password: String
+    password: String,
+
+    role: {
+        type: String,
+        enum: ['admin', 'editor', 'user'],
+        default: 'user'
+    }
 })
