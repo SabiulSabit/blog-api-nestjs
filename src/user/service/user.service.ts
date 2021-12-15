@@ -60,6 +60,14 @@ export class UserService {
         updatedUser.save()
         return updatedUser;
     }
+    
+     //update user role
+    async updateRole(id: string, role: UserRole){
+        const updatedUser = await this.userRepository.findById(id).select('-password');
+        updatedUser.role = role;
+        updatedUser.save();
+        return updatedUser;
+    }
 
     //user login
     async login(user: User) {
