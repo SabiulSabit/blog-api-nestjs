@@ -52,7 +52,7 @@ export class UserController {
     
     //update user role 
     @Put(':id/role')
-    updateUserRole(@Param('id') id: string, @Body("role") role: string){
+    updateUserRole(@Param('id') id: string, @Body("role") role: UserRole){
         return this.userService.updateRole(id, role)
     }
 }
