@@ -49,4 +49,10 @@ export class UserController {
     updateOne(@Param('id') id: string, @Body("name") name: string, @Body("username") username: string, @Body("email") email: string) {
         return this.userService.updateOne(id, name, username, email);
     }
+    
+    //update user role 
+    @Put(':id/role')
+    updateUserRole(@Param('id') id: string, @Body("role") role: string){
+        return this.userService.updateRole(id, role)
+    }
 }
