@@ -34,8 +34,8 @@ export class UserController {
     @hasRoles(UserRole.USER)
     @UseGuards(JwtAuthGuard, RolesGuard)
     @Get()
-    findAll() {
-        return this.userService.find();
+    findAll(@Param('limit') limit: string) {
+        return this.userService.find(limit);
     }
 
     //delete one use
