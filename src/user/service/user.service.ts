@@ -31,8 +31,8 @@ export class UserService {
     }
 
     //find all user
-    find() {
-        return this.userRepository.find().select('-password');
+    find(limit: string) {
+        return this.userRepository.find().select('-password').limit(parseInt((limit)));
     }
 
     //delete one user
