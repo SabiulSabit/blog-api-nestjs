@@ -34,9 +34,10 @@ export class UserController {
     @hasRoles(UserRole.USER)
     @UseGuards(JwtAuthGuard, RolesGuard)
     @Get()
-    findAll(@Param('limit') limit: string) {
-        return this.userService.find(limit);
+    findAll(@Param('limit') limit: string, @Query('username') username: string) {
+        return this.userService.find(limit, username);
     }
+
 
     //delete one use
     @Delete(':id')
