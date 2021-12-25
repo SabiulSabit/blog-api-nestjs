@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Query, UseGuards } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { hasRoles } from 'src/auth/decorator/roles.decorator';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-guard';
@@ -50,12 +50,12 @@ export class UserController {
     updateOne(@Param('id') id: string, @Body("name") name: string, @Body("username") username: string, @Body("email") email: string) {
         return this.userService.updateOne(id, name, username, email);
     }
-    
+
     //update user role 
     @hasRoles(UserRole.ADMIN)
     @UseGuards(JwtAuthGuard, RolesGuard)
     @Put(':id/role')
-    updateUserRole(@Param('id') id: string, @Body("role") role: UserRole){
+    updateUserRole(@Param('id') id: string, @Body("role") role: UserRole) {
         return this.userService.updateRole(id, role)
     }
 }
