@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { User } from '../models/user.interface';
+import { User, UserRole } from '../models/user.interface';
 import { InjectModel } from '@nestjs/mongoose'
 import { Model } from 'mongoose';
 import { AuthService } from 'src/auth/service/auth.service';
@@ -31,7 +31,7 @@ export class UserService {
     }
 
     //find all user
-    find(limit: string) {
+    find(limit: string = "0", username: string) {
         return this.userRepository.find().select('-password').limit(parseInt((limit)));
     }
 
@@ -60,9 +60,9 @@ export class UserService {
         updatedUser.save()
         return updatedUser;
     }
-    
-     //update user role
-    async updateRole(id: string, role: UserRole){
+
+    //update user role
+    async updateRole(id: string, role: UserRole) {
         const updatedUser = await this.userRepository.findById(id).select('-password');
         updatedUser.role = role;
         updatedUser.save();
