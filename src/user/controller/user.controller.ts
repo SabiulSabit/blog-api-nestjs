@@ -1,10 +1,28 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, Query, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Query, UploadedFile, UseGuards, UseInterceptors, Request } from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
 import { Observable } from 'rxjs';
 import { hasRoles } from 'src/auth/decorator/roles.decorator';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-guard';
 import { RolesGuard } from 'src/auth/guards/roles.guard';
 import { User, UserRole } from '../models/user.interface';
 import { UserService } from '../service/user.service';
+import { diskStorage } from 'multer'
+import path = require('path');
+import { v4 as uuidv4 } from 'uuid';
+
+
+//storage options
+export const storage = {
+    storage: diskStorage({
+        destination: './uploads/profileimages',
+        filename: (req, file, cb) => {
+            const filename: string = path.parse(file.originalname).name.replace(/\s/g, '') + uuidv4();
+            const extension: string = path.parse(file.originalname).ext;
+            cb(null, `${filename}${extension}`)
+        }
+    })
+
+}
 
 @Controller('users')
 export class UserController {
@@ -58,4 +76,19 @@ export class UserController {
     updateUserRole(@Param('id') id: string, @Body("role") role: UserRole) {
         return this.userService.updateRole(id, role)
     }
+
+
+    //upload profile image
+    @UseGuards(JwtAuthGuard)
+    @Post('upload')
+    @UseInterceptors(FileInterceptor('file', storage))
+    uploadFile(@UploadedFile() file, @Request() req) {
+        const user: User = req.user;
+
+        // return this.userService.updateOne(user.id, { profileImage: file.filename }).pipe(
+        //     tap((user: User) => console.log(user)),
+        //     map((user: User) => ({ profileImage: user.profileImage }))
+        // )
+    }
 }
+
