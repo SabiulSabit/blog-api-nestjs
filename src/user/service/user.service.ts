@@ -45,7 +45,7 @@ export class UserService {
     }
 
     //update one user
-    async updateOne(id: string, name: string, username: string, email: string) {
+    async updateOne(id: string, name?: string, username?: string, email?: string, profileImage?: string) {
 
         const updatedUser = await this.userRepository.findById(id).select('-password')
         if (name) {
@@ -56,6 +56,9 @@ export class UserService {
         }
         if (email) {
             updatedUser.email = email;
+        }
+        if (profileImage) {
+            updatedUser.profileImage = profileImage;
         }
 
         updatedUser.save()
