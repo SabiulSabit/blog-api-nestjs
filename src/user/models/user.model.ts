@@ -16,5 +16,8 @@ export const UserSchema = new mongoose.Schema({
         type: String,
         enum: ['admin', 'editor', 'user'],
         default: 'user'
-    }
+    },
+
+    profileImage: String
+
 })
