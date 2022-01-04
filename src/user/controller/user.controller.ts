@@ -84,11 +84,8 @@ export class UserController {
     @UseInterceptors(FileInterceptor('file', storage))
     uploadFile(@UploadedFile() file, @Request() req) {
         const user: User = req.user;
-
-        // return this.userService.updateOne(user.id, { profileImage: file.filename }).pipe(
-        //     tap((user: User) => console.log(user)),
-        //     map((user: User) => ({ profileImage: user.profileImage }))
-        // )
+        //TODO: need to update this function
+        return this.userService.updateOne(user._id, "", "", "", file.filename)
     }
 }
 
