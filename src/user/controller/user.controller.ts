@@ -1,6 +1,5 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, Query, UploadedFile, UseGuards, UseInterceptors, Request } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { Observable } from 'rxjs';
 import { hasRoles } from 'src/auth/decorator/roles.decorator';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-guard';
 import { RolesGuard } from 'src/auth/guards/roles.guard';
@@ -21,7 +20,6 @@ export const storage = {
             cb(null, `${filename}${extension}`)
         }
     })
-
 }
 
 @Controller('users')
@@ -66,7 +64,7 @@ export class UserController {
     //update a user
     @Put(':id')
     updateOne(@Param('id') id: string, @Body("name") name: string, @Body("username") username: string, @Body("email") email: string) {
-        return this.userService.updateOne(id, name, username, email);
+        return this.userService.updateOne(id, name, username, email, " ");
     }
 
     //update user role 
