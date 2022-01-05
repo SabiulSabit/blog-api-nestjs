@@ -18,6 +18,6 @@ export const UserSchema = new mongoose.Schema({
         default: 'user'
     },
 
-    profileImage: String
+    profileimage: String
 
 })
