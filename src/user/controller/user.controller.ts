@@ -8,6 +8,7 @@ import { UserService } from '../service/user.service';
 import { diskStorage } from 'multer'
 import path = require('path');
 import { v4 as uuidv4 } from 'uuid';
+import { UserIsUserGuard } from 'src/auth/guards/UserisUser-guard';
 
 
 //storage options
@@ -62,7 +63,7 @@ export class UserController {
     }
 
     //update a user
-    @UseGuards(JwtAuthGuard)
+    @UseGuards(JwtAuthGuard, UserIsUserGuard)
     @Put(':id')
     updateOne(@Param('id') id: string, @Body("name") name: string, @Body("username") username: string, @Body("email") email: string) {
         return this.userService.updateOne(id, name, username, email, " ");
