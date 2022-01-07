@@ -62,6 +62,7 @@ export class UserController {
     }
 
     //update a user
+    @UseGuards(JwtAuthGuard)
     @Put(':id')
     updateOne(@Param('id') id: string, @Body("name") name: string, @Body("username") username: string, @Body("email") email: string) {
         return this.userService.updateOne(id, name, username, email, " ");
