@@ -15,10 +15,6 @@ export class UserIsUserGuard implements CanActivate {
         const params = request.params;
         const user: User = request.user.user;
 
-        if (user._id === params.id) {
-            return true;
-        } else {
-            return false
-        }
+        return user._id === params.id ? true : false;
     }
 }
