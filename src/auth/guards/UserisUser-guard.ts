@@ -12,10 +12,13 @@ export class UserIsUserGuard implements CanActivate {
 
     canActivate(context: ExecutionContext): boolean | Promise<boolean> | Observable<boolean> {
         const request = context.switchToHttp().getRequest();
-        const params = request.params();
+        const params = request.params;
         const user: User = request.user.user;
-        // console.log(request);
 
-        let getUser = this.userService.findOne(parseFloat(user._id));
+        if (user._id === params.id) {
+            return true;
+        } else {
+            return false
+        }
     }
 }
