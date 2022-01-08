@@ -18,6 +18,8 @@ export const UserSchema = new mongoose.Schema({
         default: 'user'
     },
 
+    blogEntries: { type: mongoose.Schema.Types.ObjectId, default: [], ref: "Blog" },
+
     profileimage: String
 
 })
