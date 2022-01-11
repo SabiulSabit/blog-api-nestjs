@@ -13,6 +13,8 @@ export const BlogSchema = new mongoose.Schema({
 
     body: String,
 
+    isPublished: Boolean,
+
     likes: {
         type: Number,
         default: 0
