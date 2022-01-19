@@ -4,11 +4,9 @@ import { BlogSchema } from '../model/blog-entry.entity';
 
 import { InjectRepository } from '@nestjs/typeorm'
 import { BlogEntry } from '../model/blog-entry.interface';
-import { Repository } from "typeorm"
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { UserService } from 'src/user/service/user.service';
-import { of } from 'rxjs';
 const slugify = require('slugify')
 
 @Injectable()
