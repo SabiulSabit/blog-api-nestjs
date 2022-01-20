@@ -23,6 +23,11 @@ export class BlogService {
         return result;
     }
 
+    //find all blog post
+    findAll() {
+        return this.blogRepository.find();
+    }
+
     //generate a slug
     generateSlug(title: string) {
         return slugify(title)
