@@ -21,17 +21,22 @@ export class BlogService {
     }
 
     //find all blog post
-    findAll() {
-        return this.blogRepository.find();
+    async findAll() {
+        return await this.blogRepository.find();
     }
 
     //find single user blog posts
-    findByUserId(userId: string) {
-        return this.blogRepository.find({
+    async findByUserId(userId: string) {
+        return await this.blogRepository.find({
             where: {
                 author: userId
             }
         })
+    }
+
+    // find specific blog post 
+    async findOne(id: string) {
+        return await this.blogRepository.findById(id)
     }
 
     //generate a slug
