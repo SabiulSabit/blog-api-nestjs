@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Query, Request, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query, Request, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-guard';
 import { BlogEntry } from '../model/blog-entry.interface';
 import { BlogService } from '../service/blog.service';
@@ -18,7 +18,6 @@ export class BlogController {
 
     //find all blog post
     @Get()
-    @UseGuards(JwtAuthGuard)
     findAll(@Query('userId') userId: string) {
         if (userId) {
             return this.blogService.findByUserId(userId)
@@ -26,5 +25,11 @@ export class BlogController {
             return this.blogService.findAll();
         }
 
+    }
+
+    // find single blog post
+    @Get(":id")
+    findOne(@Param("id") id: string) {
+        return this.blogService.findOne(id);
     }
 }
