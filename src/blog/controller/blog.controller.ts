@@ -18,6 +18,7 @@ export class BlogController {
 
     //find all blog post
     @Get()
+    @UseGuards(JwtAuthGuard)
     findAll(@Query('userId') userId: string) {
         if (userId) {
             return this.blogService.findByUserId(userId)

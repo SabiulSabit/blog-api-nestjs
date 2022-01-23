@@ -1,8 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { User } from 'src/user/models/user.interface';
-import { BlogSchema } from '../model/blog-entry.entity';
-
-import { InjectRepository } from '@nestjs/typeorm'
 import { BlogEntry } from '../model/blog-entry.interface';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
@@ -26,6 +23,15 @@ export class BlogService {
     //find all blog post
     findAll() {
         return this.blogRepository.find();
+    }
+
+    //find single user blog posts
+    findByUserId(userId: string) {
+        return this.blogRepository.find({
+            where: {
+                author: userId
+            }
+        })
     }
 
     //generate a slug
