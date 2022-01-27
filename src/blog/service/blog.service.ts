@@ -4,6 +4,8 @@ import { BlogEntry } from '../model/blog-entry.interface';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { UserService } from 'src/user/service/user.service';
+import { BlogController } from '../controller/blog.controller';
+import { UpdateBlogDTO } from '../dto/updateBlog.dto';
 const slugify = require('slugify')
 
 @Injectable()
@@ -40,9 +42,20 @@ export class BlogService {
     }
 
     //update a blog post
-    async updateOne(id: string, blogEntry: BlogEntry) {
-        const updatedUser = await this.blogRepository.findById(id)
-        //return await this.blogRepository.updateOne(id, blogEntry)
+    async updateOne(id: string, updateBlogData: UpdateBlogDTO) {
+        const updatedBlog = await this.blogRepository.findById(id)
+
+        // update data
+        updateBlogData.title ? updatedBlog.title = updateBlogData.title : '';
+        updateBlogData.body ? updatedBlog.body = updateBlogData.body : '';
+        updateBlogData.description ? updatedBlog.description = updateBlogData.description : '';
+        updateBlogData.slug ? updatedBlog.description = updateBlogData.slug : '';
+        updateBlogData.headerImage ? updatedBlog.headerImage = updateBlogData.headerImage : '';
+        updateBlogData.likes ? updatedBlog.likes = updateBlogData.likes : '';
+        updateBlogData.isPublished ? updatedBlog.isPublished = updateBlogData.isPublished : '';
+
+        updatedBlog.save();
+        return updatedBlog;
     }
 
     //generate a slug
