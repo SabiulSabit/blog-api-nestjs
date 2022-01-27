@@ -49,7 +49,7 @@ export class UserService {
 
         const updatedUser = await this.userRepository.findById(id).select('-password')
 
-        console.log(profileImage);
+        // console.log(profileImage);
 
         if (name) {
             updatedUser.name = name;
