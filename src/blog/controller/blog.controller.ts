@@ -32,4 +32,6 @@ export class BlogController {
     findOne(@Param("id") id: string) {
         return this.blogService.findOne(id);
     }
+
+
 }

@@ -39,6 +39,12 @@ export class BlogService {
         return await this.blogRepository.findById(id)
     }
 
+    //update a blog post
+    async updateOne(id: string, blogEntry: BlogEntry) {
+        const updatedUser = await this.blogRepository.findById(id)
+        //return await this.blogRepository.updateOne(id, blogEntry)
+    }
+
     //generate a slug
     generateSlug(title: string) {
         return slugify(title)
