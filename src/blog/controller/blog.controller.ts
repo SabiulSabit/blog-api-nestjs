@@ -1,5 +1,6 @@
-import { Body, Controller, Get, Param, Post, Query, Request, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch, Post, Query, Request, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-guard';
+import { UpdateBlogDTO } from '../dto/updateBlog.dto';
 import { BlogEntry } from '../model/blog-entry.interface';
 import { BlogService } from '../service/blog.service';
 
@@ -31,6 +32,12 @@ export class BlogController {
     @Get(":id")
     findOne(@Param("id") id: string) {
         return this.blogService.findOne(id);
+    }
+
+    // update a blog
+    @Patch(':id')
+    async updateOne(@Param("id") id: string, @Body() blogInfo: UpdateBlogDTO) {
+        return await this.blogService.updateOne(id, blogInfo);
     }
 
 
