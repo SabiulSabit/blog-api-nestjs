@@ -35,6 +35,7 @@ export class BlogController {
     }
 
     // update a blog
+    @UseGuards(JwtAuthGuard)
     @Patch(':id')
     async updateOne(@Param("id") id: string, @Body() blogInfo: UpdateBlogDTO) {
         return await this.blogService.updateOne(id, blogInfo);
