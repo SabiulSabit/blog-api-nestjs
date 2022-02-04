@@ -1,6 +1,7 @@
 import { Body, Controller, Get, Param, Patch, Post, Query, Request, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-guard';
 import { UpdateBlogDTO } from '../dto/updateBlog.dto';
+import { UserIsAuthorGuard } from '../guards/user-is-author.guard';
 import { BlogEntry } from '../model/blog-entry.interface';
 import { BlogService } from '../service/blog.service';
 
@@ -35,7 +36,7 @@ export class BlogController {
     }
 
     // update a blog
-    @UseGuards(JwtAuthGuard)
+    @UseGuards(JwtAuthGuard, UserIsAuthorGuard)
     @Patch(':id')
     async updateOne(@Param("id") id: string, @Body() blogInfo: UpdateBlogDTO) {
         return await this.blogService.updateOne(id, blogInfo);

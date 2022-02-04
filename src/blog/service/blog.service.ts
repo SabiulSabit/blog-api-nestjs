@@ -24,7 +24,9 @@ export class BlogService {
 
     //find all blog post
     async findAll() {
-        return await this.blogRepository.find();
+        return await this.blogRepository.find().limit(5).exec((err, tweets) => {
+
+        });
     }
 
     //find single user blog posts
