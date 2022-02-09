@@ -20,11 +20,11 @@ export class BlogController {
 
     //find all blog post
     @Get()
-    findAll(@Query('userId') userId: string) {
+    findAll(@Query('userId') userId: string, @Query('limit') limit: string,) {
         if (userId) {
             return this.blogService.findByUserId(userId)
         } else {
-            return this.blogService.findAll();
+            return this.blogService.findAll(limit);
         }
 
     }

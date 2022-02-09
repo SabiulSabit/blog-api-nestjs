@@ -23,10 +23,11 @@ export class BlogService {
     }
 
     //find all blog post
-    async findAll() {
-        return await this.blogRepository.find().limit(5).exec((err, tweets) => {
+    async findAll(limit: string) {
 
-        });
+        let limitValie: number = limit ? parseInt(limit) : 5;
+
+        return await this.blogRepository.find().limit(limitValie)
     }
 
     //find single user blog posts
